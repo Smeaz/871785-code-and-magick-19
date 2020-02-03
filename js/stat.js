@@ -12,7 +12,7 @@ var HISTO_SPACE = 50;
 //
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
-};
+}
 //
 window.renderStatistics = function (ctx, names, times) {
   ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
@@ -31,22 +31,22 @@ window.renderStatistics = function (ctx, names, times) {
     for (var i = 0; i < times.length; i++) {
       if (maxScore < times[i]) {
         maxScore = Math.floor(times[i]);
-      };
-    };
-    for (var i = 0; i < 4; i++) {
+      }
+    }
+    for (i = 0; i < 4; i++) {
       if (names[i] === 'Вы') {
         ctx.fillStyle = 'rgba(255, 0, 0, 1)';
       } else {
         saturation = getRandomInt(100) + '%';
-        ctx.fillStyle = 'hsl(240,' +  saturation + ', 50%)';
-      };
+        ctx.fillStyle = 'hsl(240,' + saturation + ', 50%)';
+      }
       var currentHistoHeight = times[i] / (maxScore / HISTO_HEIGHT);
-      ctx.fillRect(CLOUD_X + IDENT  + space, CLOUD_Y + CLOUD_HEIGHT - IDENT, HISTO_WIDTH, -currentHistoHeight);
+      ctx.fillRect(CLOUD_X + IDENT + space, CLOUD_Y + CLOUD_HEIGHT - IDENT, HISTO_WIDTH, -currentHistoHeight);
       ctx.fillStyle = 'black';
       ctx.fillText(names[i], CLOUD_X + IDENT + space, CLOUD_Y + CLOUD_HEIGHT - 33);
       ctx.fillText(Math.floor(times[i]), CLOUD_X + IDENT + space, HISTO_HEIGHT - currentHistoHeight + 73);
       space += HISTO_SPACE + HISTO_WIDTH;
-    };
+    }
   };
   renderColumns();
 };
