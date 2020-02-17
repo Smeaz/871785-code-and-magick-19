@@ -15,6 +15,7 @@ function getRandomInt(max) {
 }
 //
 window.renderStatistics = function (ctx, names, times) {
+  var renderCloud = function () {
   ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
   ctx.fillRect(CLOUD_X + OFFSET, CLOUD_Y + OFFSET, CLOUD_WIDTH, CLOUD_HEIGHT);
   ctx.fillStyle = 'white';
@@ -27,20 +28,23 @@ window.renderStatistics = function (ctx, names, times) {
   var renderColumns = function () {
     var space = 0;
     var saturation;
-    var maxScore = 0;
-    for (var i = 0; i < times.length; i++) {
-      if (maxScore < times[i]) {
-        maxScore = Math.floor(times[i]);
+    var getMaxScore = function (scores) {
+      var maxScore = null;
+      for (var i = 0; i < scores.length; i++) {
+        if (maxScore < scores[i]) {
+          maxScore = Math.floor(scores[i]);
+        }
       }
-    }
-    for (i = 0; i < 4; i++) {
+      return maxScore;
+    };
+    for (var i = 0; i < 4; i++) {
       if (names[i] === 'Вы') {
         ctx.fillStyle = 'rgba(255, 0, 0, 1)';
       } else {
         saturation = getRandomInt(100) + '%';
         ctx.fillStyle = 'hsl(240,' + saturation + ', 50%)';
       }
-      var currentHistoHeight = times[i] / (maxScore / HISTO_HEIGHT);
+      var currentHistoHeight = times[i] / (getMaxScore(times) / HISTO_HEIGHT);
       ctx.fillRect(CLOUD_X + IDENT + space, CLOUD_Y + CLOUD_HEIGHT - IDENT, HISTO_WIDTH, -currentHistoHeight);
       ctx.fillStyle = 'black';
       ctx.fillText(names[i], CLOUD_X + IDENT + space, CLOUD_Y + CLOUD_HEIGHT - 33);
