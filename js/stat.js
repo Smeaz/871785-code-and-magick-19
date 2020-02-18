@@ -30,18 +30,18 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillText('Список результатов:', CLOUD_X + 25, CLOUD_Y + 45);
   };
   displayText();
+  var getMaxScore = function (scores) {
+    var maxScore = scores[0];
+    for (var i = 1; i < scores.length; i++) {
+      if (maxScore < scores[i]) {
+        maxScore = Math.floor(scores[i]);
+      }
+    }
+    return maxScore;
+  };
   var renderColumns = function () {
     var space = 0;
     var saturation;
-    var getMaxScore = function (scores) {
-      var maxScore = null;
-      for (var i = 0; i < scores.length; i++) {
-        if (maxScore < scores[i]) {
-          maxScore = Math.floor(scores[i]);
-        }
-      }
-      return maxScore;
-    };
     for (var i = 0; i < 4; i++) {
       if (names[i] === 'Вы') {
         ctx.fillStyle = 'rgba(255, 0, 0, 1)';
