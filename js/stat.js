@@ -16,15 +16,20 @@ function getRandomInt(max) {
 //
 window.renderStatistics = function (ctx, names, times) {
   var renderCloud = function () {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-  ctx.fillRect(CLOUD_X + OFFSET, CLOUD_Y + OFFSET, CLOUD_WIDTH, CLOUD_HEIGHT);
-  ctx.fillStyle = 'white';
-  ctx.fillRect(CLOUD_X, CLOUD_Y, CLOUD_WIDTH, CLOUD_HEIGHT);
-  ctx.fillStyle = 'black';
-  ctx.font = '16px PT Mono';
-  ctx.textBaseline = 'hanging';
-  ctx.fillText('Ура вы победили!', CLOUD_X + 25, CLOUD_Y + 25);
-  ctx.fillText('Список результатов:', CLOUD_X + 25, CLOUD_Y + 45);
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+    ctx.fillRect(CLOUD_X + OFFSET, CLOUD_Y + OFFSET, CLOUD_WIDTH, CLOUD_HEIGHT);
+    ctx.fillStyle = 'white';
+    ctx.fillRect(CLOUD_X, CLOUD_Y, CLOUD_WIDTH, CLOUD_HEIGHT);
+  };
+  renderCloud();
+  var displayText = function () {
+    ctx.fillStyle = 'black';
+    ctx.font = '16px PT Mono';
+    ctx.textBaseline = 'hanging';
+    ctx.fillText('Ура вы победили!', CLOUD_X + 25, CLOUD_Y + 25);
+    ctx.fillText('Список результатов:', CLOUD_X + 25, CLOUD_Y + 45);
+  };
+  displayText();
   var renderColumns = function () {
     var space = 0;
     var saturation;
